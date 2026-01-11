@@ -1,5 +1,7 @@
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
-import logoImage from '@/assets/logo.png';
+
+// Logo - descomenta la siguiente línea cuando agregues el archivo logo.png en src/assets/
+// import logoImage from '@/assets/logo.png';
 
 export const Footer = () => {
   return (
@@ -9,11 +11,14 @@ export const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img 
-                src={logoImage} 
-                alt="Almacén Sabaot" 
-                className="h-10 w-auto object-contain"
-              />
+              {/* Descomenta cuando agregues el logo */}
+              {/* {logoImage && (
+                <img 
+                  src={logoImage} 
+                  alt="Almacén Sabaot" 
+                  className="h-10 w-auto object-contain"
+                />
+              )} */}
               <h3 className="font-display text-2xl font-bold text-accent">
                 ALMACÉN SABAOT
               </h3>
