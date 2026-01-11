@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { categories } from '@/data/products';
 import { motion, AnimatePresence } from 'framer-motion';
+import logoImage from '@/assets/logo.png';
 
 interface HeaderProps {
   onCategoryClick: (categoryId: string) => void;
@@ -21,8 +22,13 @@ export const Header = ({ onCategoryClick }: HeaderProps) => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <span className="font-display text-2xl md:text-3xl font-bold text-primary-foreground tracking-wide">
-              BAHAMET
+            <img 
+              src={logoImage} 
+              alt="Almacén Sabaot" 
+              className="h-10 md:h-12 w-auto object-contain"
+            />
+            <span className="font-display text-xl md:text-2xl font-bold text-primary-foreground tracking-wide hidden sm:block">
+              ALMACÉN SABAOT
             </span>
           </a>
 

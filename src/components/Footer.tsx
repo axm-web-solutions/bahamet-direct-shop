@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
+import logoImage from '@/assets/logo.png';
 
 export const Footer = () => {
   return (
@@ -7,9 +8,16 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="font-display text-2xl font-bold mb-4 text-accent">
-              BAHAMET
-            </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src={logoImage} 
+                alt="Almacén Sabaot" 
+                className="h-10 w-auto object-contain"
+              />
+              <h3 className="font-display text-2xl font-bold text-accent">
+                ALMACÉN SABAOT
+              </h3>
+            </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed mb-4">
               Tu hogar merece lo mejor. Ofrecemos productos de alta calidad 
               para crear espacios de confort y estilo.
@@ -93,7 +101,7 @@ export const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t border-primary-foreground/10 mt-10 pt-6 text-center text-sm text-primary-foreground/50">
-          <p>© {new Date().getFullYear()} Bahamet. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} Almacén Sabaot. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
