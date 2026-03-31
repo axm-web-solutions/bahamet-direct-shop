@@ -1,7 +1,6 @@
-import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
-
-// Logo - descomenta la siguiente línea cuando agregues el archivo logo.png en src/assets/
-// import logoImage from '@/assets/logo.png';
+import { Mail, MapPin, Clock, Instagram, Facebook, MessageCircle } from 'lucide-react';
+import { whatsappAdvisors, buildWhatsAppUrl, defaultWhatsAppGreeting } from '@/data/whatsappAdvisors';
+import logoImage from '@/assets/logo.jpg';
 
 export const Footer = () => {
   return (
@@ -11,14 +10,11 @@ export const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              {/* Descomenta cuando agregues el logo */}
-              {/* {logoImage && (
-                <img 
-                  src={logoImage} 
-                  alt="Almacén Sabaot" 
-                  className="h-10 w-auto object-contain"
-                />
-              )} */}
+              <img
+                src={logoImage}
+                alt=""
+                className="h-11 w-auto max-h-12 object-contain shrink-0"
+              />
               <h3 className="font-display text-2xl font-bold text-accent">
                 ALMACÉN SABAOT
               </h3>
@@ -60,9 +56,28 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Contacto</h4>
             <ul className="space-y-3 text-primary-foreground/70 text-sm">
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-accent" />
-                <span>+57 300 123 4567</span>
+              <li>
+                <p className="mb-2 font-medium text-primary-foreground text-xs uppercase tracking-wide">
+                  WhatsApp — elige tu asesor
+                </p>
+                <ul className="space-y-2">
+                  {whatsappAdvisors.map((advisor) => (
+                    <li key={advisor.id}>
+                      <a
+                        href={buildWhatsAppUrl(advisor.waNumber, defaultWhatsAppGreeting)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 hover:text-accent transition-colors"
+                      >
+                        <MessageCircle className="w-4 h-4 text-accent shrink-0" />
+                        <span>
+                          {advisor.name} · +57{' '}
+                          {advisor.waNumber.slice(2)}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-accent" />

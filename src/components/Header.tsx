@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { categories } from '@/data/products';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// Logo - descomenta la siguiente línea cuando agregues el archivo logo.png en src/assets/
-// import logoImage from '@/assets/logo.png';
+import { useWhatsAppPicker } from '@/context/WhatsAppPickerContext';
+import logoImage from '@/assets/logo.jpg';
 
 interface HeaderProps {
   onCategoryClick: (categoryId: string) => void;
@@ -12,6 +11,7 @@ interface HeaderProps {
 
 export const Header = ({ onCategoryClick }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { openPicker } = useWhatsAppPicker();
 
   const handleCategoryClick = (categoryId: string) => {
     onCategoryClick(categoryId);
@@ -23,15 +23,12 @@ export const Header = ({ onCategoryClick }: HeaderProps) => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            {/* Descomenta cuando agregues el logo */}
-            {/* {logoImage && (
-              <img 
-                src={logoImage} 
-                alt="Almacén Sabaot" 
-                className="h-10 md:h-12 w-auto object-contain"
-              />
-            )} */}
+          <a href="#" className="flex items-center gap-2 md:gap-3">
+            <img
+              src={logoImage}
+              alt=""
+              className="h-9 w-auto max-h-11 md:h-11 md:max-h-[3rem] object-contain shrink-0"
+            />
             <span className="font-display text-xl md:text-2xl font-bold text-primary-foreground tracking-wide">
               ALMACÉN SABAOT
             </span>
@@ -52,15 +49,14 @@ export const Header = ({ onCategoryClick }: HeaderProps) => {
 
           {/* CTA and Mobile Menu */}
           <div className="flex items-center gap-3">
-            <a
-              href="https://wa.me/573001234567"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => openPicker()}
               className="hidden md:flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground font-semibold rounded-lg hover:bg-accent/90 transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
               Contáctanos
-            </a>
+            </button>
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -92,15 +88,17 @@ export const Header = ({ onCategoryClick }: HeaderProps) => {
                   <span className="font-medium">{category.name}</span>
                 </button>
               ))}
-              <a
-                href="https://wa.me/573001234567"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 mt-3 px-4 py-3 bg-accent text-accent-foreground font-semibold rounded-lg"
+              <button
+                type="button"
+                onClick={() => {
+                  openPicker();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 mt-3 px-4 py-3 bg-accent text-accent-foreground font-semibold rounded-lg w-full"
               >
                 <Phone className="w-4 h-4" />
                 Contáctanos
-              </a>
+              </button>
             </nav>
           </motion.div>
         )}

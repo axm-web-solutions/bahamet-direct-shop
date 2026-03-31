@@ -1,12 +1,15 @@
+import heroImage from '@/assets/hero-bedroom.jpg';
+import { useWhatsAppPicker } from '@/context/WhatsAppPickerContext';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import heroImage from '@/assets/hero-bedroom.jpg';
 
 interface HeroProps {
   onExploreClick: () => void;
 }
 
 export const Hero = ({ onExploreClick }: HeroProps) => {
+  const { openPicker } = useWhatsAppPicker();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -64,14 +67,17 @@ export const Hero = ({ onExploreClick }: HeroProps) => {
             >
               Explorar Productos
             </button>
-            <a
-              href="https://wa.me/573001234567?text=Hola, me gustaría recibir más información sobre sus productos"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() =>
+                openPicker(
+                  'Hola, me gustaría recibir más información sobre sus productos',
+                )
+              }
               className="px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-bold rounded-lg hover:bg-primary-foreground/20 transition-all duration-300 border border-primary-foreground/30"
             >
               Hablar con un asesor
-            </a>
+            </button>
           </motion.div>
 
           {/* Trust badges */}
@@ -87,7 +93,7 @@ export const Hero = ({ onExploreClick }: HeroProps) => {
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/70">
               <span className="text-2xl">🛡️</span>
-              <span className="text-sm">Garantía 10 años</span>
+              <span className="text-sm">Garantía 5 años</span>
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/70">
               <span className="text-2xl">💳</span>

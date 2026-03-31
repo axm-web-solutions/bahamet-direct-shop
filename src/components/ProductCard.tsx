@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MessageCircle, Tag } from 'lucide-react';
 import type { Product } from '@/data/products';
+import { useWhatsAppPicker } from '@/context/WhatsAppPickerContext';
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +11,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product, index }: ProductCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { openPicker } = useWhatsAppPicker();
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => 
@@ -36,15 +38,12 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : 0;
 
-  const whatsappMessage = encodeURIComponent(
+  const whatsappMessage =
     `¡Hola! Me interesa el producto:\n\n` +
     `📦 *${product.name}*\n` +
     `💰 Precio: ${formatPrice(product.price)}\n` +
     `📝 ${product.description}\n\n` +
-    `¿Me pueden dar más información?`
-  );
-
-  const whatsappUrl = `https://wa.me/573001234567?text=${whatsappMessage}`;
+    `¿Me pueden dar más información?`;
 
   return (
     <motion.div
@@ -141,15 +140,14 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
         </div>
 
         {/* CTA Button */}
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={() => openPicker(whatsappMessage)}
           className="flex items-center justify-center gap-2 w-full py-3 bg-green-600 hover:bg-green-700 text-cream font-semibold rounded-lg transition-colors duration-200"
         >
           <MessageCircle className="w-5 h-5" />
           Comprar por WhatsApp
-        </a>
+        </button>
       </div>
     </motion.div>
   );

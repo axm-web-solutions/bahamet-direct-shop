@@ -23,7 +23,7 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600',
     ],
     category: 'colchones',
-    features: ['Espuma viscoelástica', 'Alta densidad', 'Garantía 10 años'],
+    features: ['Espuma viscoelástica', 'Alta densidad', 'Garantía 5 años'],
   },
   {
     id: 'colchon-2',

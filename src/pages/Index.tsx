@@ -4,6 +4,7 @@ import { Hero } from '@/components/Hero';
 import { ProductSection } from '@/components/ProductSection';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { WhatsAppPickerProvider } from '@/context/WhatsAppPickerContext';
 import { products, categories } from '@/data/products';
 
 const Index = () => {
@@ -28,26 +29,28 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header onCategoryClick={scrollToCategory} />
-      <Hero onExploreClick={scrollToProducts} />
+    <WhatsAppPickerProvider>
+      <div className="min-h-screen bg-background">
+        <Header onCategoryClick={scrollToCategory} />
+        <Hero onExploreClick={scrollToProducts} />
 
-      <main>
-        {categories.map((category) => (
-          <ProductSection
-            key={category.id}
-            ref={(el) => (sectionsRef.current[category.id] = el)}
-            id={category.id}
-            title={category.name}
-            icon={category.icon}
-            products={getProductsByCategory(category.id)}
-          />
-        ))}
-      </main>
+        <main>
+          {categories.map((category) => (
+            <ProductSection
+              key={category.id}
+              ref={(el) => (sectionsRef.current[category.id] = el)}
+              id={category.id}
+              title={category.name}
+              icon={category.icon}
+              products={getProductsByCategory(category.id)}
+            />
+          ))}
+        </main>
 
-      <Footer />
-      <WhatsAppButton />
-    </div>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    </WhatsAppPickerProvider>
   );
 };
 
